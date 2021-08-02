@@ -4,8 +4,8 @@ class CreateInvites < ActiveRecord::Migration[6.1]
       t.text :message
       t.boolean :rsvp, null: true, default: nil
       
-      t.references :users, :invited_user, foreign_key: true
-      t.references :events, :event_invite, foreign_key: true
+      t.references :invited_user, foreign_key: { to_table: :users }
+      t.references :event_invite, foreign_key: { to_table: :events }
       t.timestamps
     end
   end
