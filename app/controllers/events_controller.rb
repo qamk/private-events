@@ -4,9 +4,13 @@ class EventsController < ApplicationController
   
   attr_accessor :event
 
+  EVENTS_PER_PAGE = 4
+
   # GET / (root)
   def index
-    @events = Event.all.includes(:host)
+    @page = params.fetch(:page, 0).to_i # return :page from params or return 0
+    @events = Event.for_page(@page, EVENTS_PER_PAGE)
+    @older_events = Event.for_page(@page + 1, EVENTS_PER_PAGE)
   end
 
   # GET /events/new
@@ -15,14 +19,13 @@ class EventsController < ApplicationController
 
   # GET /events/:id
   def show
-    @attending = Event.attending(true, params[:id])
-    @not_attending = Event.attending(false, params[:id])
+    @users_attending = Event.users_attending(true, params[:id])
+    @not_users_attending = Event.users_attending(false, params[:id])
     
   end
 
   # GET /events/:id/edit
   def edit
-    
   end
 
   # PUT /events/:id
@@ -47,7 +50,8 @@ class EventsController < ApplicationController
 
   # DELETE /events/:id
   def destroy
-
+    @event.destroy
+    redirect_to events_path, notice: 'Event Deleted'
   end
 
   private

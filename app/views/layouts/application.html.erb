@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <div class="nav-bar">
+      <div class="notice">
+        <% if flash[:notice] %>
+          <%= notice %>
+        <% end %>
+      </div>
+      <div class="error">
+        <% if flash[:error] %>
+          <%= error %>
+        <% end %>
+      </div>  
+    </div>
     <%= yield %>
   </body>
 </html>

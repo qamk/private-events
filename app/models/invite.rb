@@ -7,7 +7,7 @@ class Invite < ApplicationRecord
                                       maximum: 20,
                                       too_long: "No more than 20 words. You have %{count}."
                                     }
-  scope :invited, ->(event_id) { joins(:users).where(event_invited_id: event_id) }
+  scope :invited, ->(event_id) { joins(:users).where(event_invite_id: event_id) }
   def message_length
     message.scan(/\w+/)
   end

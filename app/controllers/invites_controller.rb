@@ -33,11 +33,19 @@ class InvitesController < ApplicationController
 
   # POST events/:event_id/invites
   def create
-
+    @new_invite = @event.invited_users.build(create_invite_params)
+    if @new_invite.save
+      redirect_to events_invites_path(@event), notice: 'Success! The invite has been created.'
+    else
+      flash.now[:error] = 'Failed to create new invite'
+      render :new
+    end
   end
 
   # DELETE invites/:id
   def destroy
+    @invite.destroy
+    redirect_to root, notice: 'Success! The invite has been deleted.'
   end
 
   protected
