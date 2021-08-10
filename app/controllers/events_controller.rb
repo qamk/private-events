@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET / (root)
   def index
     @page = params.fetch(:page, 0).to_i # return :page from params or return 0
-    @events = Event.for_page(@page, EVENTS_PER_PAGE)
+    @events = Event.for_page(@page, EVENTS_PER_PAGE).includes(:host)
     @older_events = Event.for_page(@page + 1, EVENTS_PER_PAGE)
   end
 

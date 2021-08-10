@@ -1,0 +1,32 @@
+<div class="section is-medium">
+  <div class="block">
+    <h2 class="is-title is-2"></h2>
+    <div class="container">
+      <div class="box">
+        <%= form_with model: event do |form| %>
+          <div class="field">
+            <%= form.label :name, 'Name' %>
+            <div class="control">
+              <%= form.text_field :name, placeholder: 'Name of the event', class: 'input' %>
+            </div>
+          </div>
+          <div class="field">
+            <%= form.label :location, 'City' %>
+            <div class="control">
+              <%= form.text_field :location, placeholder: 'London, New York, Somewhere in the Belt... etc', class: 'input' %>
+            </div>
+          </div>
+          <div class="field">
+            <%# DATETIME... MAYBE DATE AND TIME THO %>
+          </div>
+          <div class="field">
+            <%= form.label :description, 'Event Description' %>
+            <div class="control">
+              <%= form.text_area :description, placeholder: 'Make your event inticing!', class: 'textarea' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<%# Invites listing %>
+<div class="section is-medium">
+  <div class="block">
+    <div class="columns">
+      <div class="column">
+        <%= render 'invites', invited: @invited %>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <nav class="pagination">
+      <% unless @page.zero? %>
+        <%= link_to "Previous Page", events_invites_path(page: @page - 1), class: 'pagination-previous' %>
+      <% end %>
+      <% if @older_invites.exists? %>
+        <%= link_to "Next Page", events_invites_path(page: @page + 1), class: 'pagination-next' %>
+      <% end %>
+    </nav>
+  </div>
+</div>

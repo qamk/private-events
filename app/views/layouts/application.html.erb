@@ -11,18 +11,44 @@
   </head>
 
   <body>
-    <div class="nav-bar">
-      <div class="notice">
-        <% if flash[:notice] %>
+    <div class="navbar">
+      <% if flash[:notice] %>
+        <div class="notification is-info">
           <%= notice %>
+        </div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="notification is-error">
+          <%= error %>
+        </div>  
+      <% end %>
+      <div class="navbar-brand">
+        <%= link_to root_path, class: 'navbar-item' do %>
+          <h2 class="is-title is-2">Private Events</h2>
         <% end %>
       </div>
-      <div class="error">
-        <% if flash[:error] %>
-          <%= error %>
-        <% end %>
-      </div>  
+      <div class="navbar-end">
+        <div class="buttons">
+          <% if user_signed_in? %>
+              <div class="navbar-item">
+                <%= link_to "Edit account", edit_user_registration_path, class: "button is-primary is-active" %>
+              </div>
+              <div>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger is-active" %>
+              </div>
+            <% else %>
+              <div class="navbar-item">
+                <%= link_to 'Sign In', new_user_session_path, class: "button is-info is-active" %>
+              </div>
+              <div class="navbar-item">
+                <%= link_to 'Sign Up', new_user_registration_path, class: "button is-success is-active" %>
+              </div>
+            <% end %>
+        </div>
+      </div>
     </div>
-    <%= yield %>
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>

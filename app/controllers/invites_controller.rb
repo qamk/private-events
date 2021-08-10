@@ -3,9 +3,13 @@ class InvitesController < ApplicationController
   before_action :grab_event, except: %i[show edit destroy]
   before_action :grab_invite, except: %i[index]
 
+  INVITES_PER_PAGE = 6
+
   # GET events/:event_id/invites
   def index
-    @invited = Invite.invited(params[:event_id]).select(:username)
+    @page = params.fetch(:page, 0).to_i
+    @invited = Invite.invited(params[:event_id]).for_page(@page, INVITES_PER_PAGE).select(:username)
+    @older_invites = Invite.invited(params[:event_id]).for_page(@page + 1, INVITES_PER_PAGE)
   end
 
   # GET invites/:id

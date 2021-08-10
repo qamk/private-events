@@ -1,3 +1,43 @@
-<div class="section is-medium">
-  
+<div class="container is-widescreen">
+  <% events.each do |event| %>
+    <div class="column is-one-quarter">
+      <div class="card">
+        <article class="media">
+          <div class="card-header">
+            <p class="card-header-title">
+              <strong><%= event.name %></strong>
+              <small><%= event.location %></small>
+              <br/>
+              by
+              <em><%= event.host.username %></em>
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="media-content">
+              <p class="content">
+                <%= event.description %>
+              </p>
+              <div class="level">
+                <div class="level-left">
+                  <div class="level-item">
+                    <%= event.location %>
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="level-item">
+                    <%= event.datetime %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer-item">
+              <%= link_to "View Event", event_path(event) %>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  <% end %>
 </div>

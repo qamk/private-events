@@ -1,17 +1,21 @@
 <%# Main page of the site %>
 <div class="section is-medium">
-  <div class="columns">
-    <div class="column">
-      <%= render 'events' %>
+  <div class="block">
+    <div class="columns">
+      <div class="column">
+        <%= render 'events', events: @events %>
+      </div>
     </div>
   </div>
 
-  <nav class="pagination">
-    <% unless @page.zero? do %>
-      <%= link_to "Previous Page", events_path(page: @page - 1), class: 'pagination-previous' %>
-    <% end %>
-    <% if @older.events.exists? %>
-      <%= link_to "Next Page", events_path(page: @page + 1), class: 'pagination-next' %>
-    <% end %>
-  </nav>
+  <div class="block">
+    <nav class="pagination">
+      <% unless @page.zero? %>
+        <%= link_to "Previous Page", events_path(page: @page - 1), class: 'pagination-previous' %>
+      <% end %>
+      <% if @older_events.exists? %>
+        <%= link_to "Next Page", events_path(page: @page + 1), class: 'pagination-next' %>
+      <% end %>
+    </nav>
+  </div>
 </div>

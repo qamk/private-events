@@ -1,0 +1,62 @@
+<div class="section">
+  <div class="container">
+    <div class="column is-half">
+      <div class="block">
+        <h3 class="title is-3">Sign up</h3>
+        <h5 class="subtitle is-5">Get to eventing!</h5>
+      </div>
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="block">
+                <div class="field">
+                  <%= f.label :username, 'Username' %>
+                  <div class="control">
+                    <%= f.text_field :username, autofocus: true, class: 'input' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block">
+                <div class="field">
+                  <%= f.label :email %>
+                  <div class="control">
+                    <%= f.email_field :email, autocomplete: "email", class: 'input' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block">
+                <div class="field">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %><br />
+                  <div class="control">
+                    <%= f.password_field :password, autocomplete: "new-password", class: 'input' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation %><br />
+                <div class="control">
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
+                </div>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Sign up", class: 'button is-success is-outlined' %>
+              </div>
+            <% end %>
+          </div>  
+        </div>
+      </div>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
+
