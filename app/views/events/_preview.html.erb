@@ -1,0 +1,32 @@
+<div class="tile is-ancestor">
+  <div class="level">
+    <div class="level-item">
+      <h2 class="title is-2">Current details</h2>
+      <h6 class="subtitle is-6">For your reference</h6>
+    </div>
+  </div>
+  <div class="tile is-parent is-vertical is-3">
+    <div class="tile is-child box"> <%# box for drop shadow %>
+      <h4 class="title is-4">Event Name</h4>
+      <p class="content"><%= event.name %></p>
+    </div>
+    <div class="tile is-child box">
+      <h4 class="title is-4">Event Location</h4>
+      <p class="content"><%= event.location %></p>
+    </div>
+    <div class="tile is-child box">
+      <h4 class="title is-4">Event Date</h4>
+      <p class="content"><%= event.datetime %></p>
+    </div>
+    <%# if it's changed to DATE & TIME not just DATETIME %>
+    <%#<div class="tile is-child box">
+
+    </div> %>
+  </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <h4 class="title is-4">Event Description</h4>
+      <p class="content"><%= event.description %></p>
+    </div>
+  </div>
+</div>

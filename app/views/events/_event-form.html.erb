@@ -20,6 +20,9 @@
             <%# DATETIME... MAYBE DATE AND TIME THO %>
           </div>
           <div class="field">
+            <% if flash[:too_long] %>
+              <p class="content is-danger is-light"><%= too_long %></p>
+            <% end %>
             <%= form.label :description, 'Event Description' %>
             <div class="control">
               <%= form.text_area :description, placeholder: 'Make your event inticing!', class: 'textarea' %>

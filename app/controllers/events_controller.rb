@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :grab_event, except: %i[index destroy create]
   before_action :authenticate_user!, except: %i[index show]
-  
+
   attr_accessor :event
 
   EVENTS_PER_PAGE = 4
@@ -20,8 +20,7 @@ class EventsController < ApplicationController
   # GET /events/:id
   def show
     @users_attending = Event.users_attending(true, params[:id])
-    @not_users_attending = Event.users_attending(false, params[:id])
-    
+    @users_not_attending = Event.users_attending(false, params[:id])
   end
 
   # GET /events/:id/edit
