@@ -1,14 +1,14 @@
 class InvitesController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :grab_event, except: %i[show edit destroy]
-  before_action :grab_invite, except: %i[index]
+  before_action :grab_invite, except: %i[index new]
 
-  INVITES_PER_PAGE = 6
+  INVITES_PER_PAGE = 8
 
   # GET events/:event_id/invites
   def index
     @page = params.fetch(:page, 0).to_i
-    @invited = Invite.invited(params[:event_id]).for_page(@page, INVITES_PER_PAGE).select(:username)
+    @invited = Invite.invited(params[:event_id]).for_page(@page, INVITES_PER_PAGE)
     @older_invites = Invite.invited(params[:event_id]).for_page(@page + 1, INVITES_PER_PAGE)
   end
 
@@ -19,6 +19,8 @@ class InvitesController < ApplicationController
   # GET events/:event_id/invites/new
   def new
     redirect_to events_invites_path(@event) unless event_creator?
+    @invite = Invite.new
+    @users = User.all.where.not("users.id = ?", @event.host.id)
   end
 
   # GET invites/:id/edit
@@ -55,7 +57,7 @@ class InvitesController < ApplicationController
   protected
 
   def invited_user?
-    grab_invite
+    @invite ||= grab_invite
     if @invite.invited_user == current_user
       true
     else
@@ -66,7 +68,7 @@ class InvitesController < ApplicationController
   helper_method :invited_user? # Gives method access to view
 
   def event_creator?
-    grab_event
+    @event ||= grab_event
     if @event.host == current_user
       true
     else
@@ -91,7 +93,7 @@ class InvitesController < ApplicationController
   end
 
   def grab_invite
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find(params[:id]).includes(:users)
   end
 
 end

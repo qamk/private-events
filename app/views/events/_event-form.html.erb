@@ -1,35 +1,52 @@
-<div class="section is-medium">
   <div class="block">
     <h2 class="is-title is-2"></h2>
     <div class="container">
       <div class="box">
         <%= form_with model: event do |form| %>
-          <div class="field">
-            <%= form.label :name, 'Name' %>
-            <div class="control">
-              <%= form.text_field :name, placeholder: 'Name of the event', class: 'input' %>
+
+          <div class="block">
+            <div class="field">
+              <%= form.label :name, 'Name' %>
+              <div class="control">
+                <%= form.text_field :name, autofocus: true, placeholder: 'Name of the event', class: 'input' %>
+              </div>
             </div>
           </div>
-          <div class="field">
-            <%= form.label :location, 'City' %>
-            <div class="control">
-              <%= form.text_field :location, placeholder: 'London, New York, Somewhere in the Belt... etc', class: 'input' %>
+
+          <div class="block">
+            <div class="field">
+              <%= form.label :location, 'City' %>
+              <div class="control">
+                <%= form.text_field :location, placeholder: 'London, New York, Somewhere in the Belt... etc', class: 'input' %>
+              </div>
             </div>
           </div>
-          <div class="field">
-            <%# DATETIME... MAYBE DATE AND TIME THO %>
-          </div>
-          <div class="field">
-            <% if flash[:too_long] %>
-              <p class="content is-danger is-light"><%= too_long %></p>
-            <% end %>
-            <%= form.label :description, 'Event Description' %>
-            <div class="control">
-              <%= form.text_area :description, placeholder: 'Make your event inticing!', class: 'textarea' %>
+
+          <div class="block">
+            <div class="field">
+              <%= form.label :datetime, 'Select the Date and Time' %>
+              <div class="control">
+                <%= form.datetime_select :datetime, { start_year: Date.today.year }, { class: "select" } %>
+              </div>
             </div>
+          </div>
+
+          <div class="block">
+            <div class="field">
+              <% if flash[:too_long] %>
+                <p class="content is-danger is-light"><%= too_long %></p>
+              <% end %>
+              <%= form.label :description, 'Event Description' %>
+              <div class="control">
+                <%= form.text_area :description, placeholder: 'Make your event inticing!', class: 'textarea' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <%= form.submit class: 'button is-success is-dark is-active' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
-</div>

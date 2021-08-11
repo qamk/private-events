@@ -11,18 +11,23 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="content is-medium"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-warning">
+        <p class="content is-medium"><%= alert %></p>
+      </div>  
+    <% end %>
+    <% if flash[:error] %>
+      <div class="notification is-danger">
+        <p class="content is-medium"><%= flash[:error] %></p>
+      </div>  
+    <% end %>
     <div class="navbar">
-      <% if flash[:notice] %>
-        <div class="notification is-info">
-          <%= notice %>
-        </div>
-      <% end %>
-      <% if flash[:error] %>
-        <div class="notification is-error">
-          <%= error %>
-        </div>  
-      <% end %>
-      <div class="navbar-brand">
+      <div class="navbar-brand button is-white">
         <%= link_to root_path, class: 'navbar-item' do %>
           <h2 class="is-title is-2">Private Events</h2>
         <% end %>
@@ -30,20 +35,23 @@
       <div class="navbar-end">
         <div class="buttons">
           <% if user_signed_in? %>
-              <div class="navbar-item">
-                <%= link_to "Edit account", edit_user_registration_path, class: "button is-primary is-active" %>
-              </div>
-              <div>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger is-active" %>
-              </div>
-            <% else %>
-              <div class="navbar-item">
-                <%= link_to 'Sign In', new_user_session_path, class: "button is-info is-active" %>
-              </div>
-              <div class="navbar-item">
-                <%= link_to 'Sign Up', new_user_registration_path, class: "button is-success is-active" %>
-              </div>
-            <% end %>
+            <div class="navbar-item">
+              <%= link_to 'New Event', new_event_path, class: "button is-primary is-dark is-inverted" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to "Edit account", edit_user_registration_path, class: "button is-primary is-active" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger is-active" %>
+            </div>
+          <% else %>
+            <div class="navbar-item">
+              <%= link_to 'Sign In', new_user_session_path, class: "button is-info is-active" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to 'Sign Up', new_user_registration_path, class: "button is-success is-active" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

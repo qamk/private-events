@@ -1,5 +1,6 @@
 <div class="section">
   <div class="container">
     <%= render 'preview', event: @event %>
+    <%= link_to "Edit event", edit_event_path(@event), class: "button is-link is-active" %>
   </div>
 </div>

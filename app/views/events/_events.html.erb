@@ -1,26 +1,22 @@
-<div class="container is-widescreen">
+<div class="container is-fluid">
   <% events.each do |event| %>
-    <div class="column is-one-quarter">
+    <div class="column">
       <div class="card">
-        <article class="media">
-          <div class="card-header">
-            <p class="card-header-title">
-              <strong><%= event.name %></strong>
-              <small><%= event.location %></small>
-              <br/>
-              by
-              <em><%= event.host.username %></em>
+        <header class="card-header">
+          <p class="card-header-title">
+            <strong><%= event.name %></strong>
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="media-content">
+            <p class="content">
+              <%= event.description %>
             </p>
-          </div>
-          <div class="card-content">
-            <div class="media-content">
-              <p class="content">
-                <%= event.description %>
-              </p>
+            <div class="box">
               <div class="level">
                 <div class="level-left">
                   <div class="level-item">
-                    <%= event.location %>
+                    <p class="content">in <%= event.location %></p>
                   </div>
                 </div>
                 <div class="level-right">
@@ -31,12 +27,15 @@
               </div>
             </div>
           </div>
-          <div class="card-footer">
-            <div class="card-footer-item">
-              <%= link_to "View Event", event_path(event) %>
-            </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-item">
+            <%= link_to "View Event", event_path(event) %>
           </div>
-        </article>
+          <div class="card-footer-item">
+            <p class="content">by <em> <%= event.host.username %></em></p>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

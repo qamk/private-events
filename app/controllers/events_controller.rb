@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :grab_event, except: %i[index destroy create]
+  before_action :grab_event, except: %i[index destroy create new]
+  before_action :new_event, only: %i[index new]
   before_action :authenticate_user!, except: %i[index show]
 
   attr_accessor :event
@@ -38,11 +39,11 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @new_event = current_user.events.build(event_params)
+    @new_event = current_user.hosted_events.build(event_params)
     if @new_event.save
       redirect_to @new_event, notice: 'New event registered!'
     else
-      flash.now[:error] = 'Could not create event'
+      flash[:error] = 'Could not create event'
       render :new
     end
   end
@@ -54,6 +55,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def new_event
+    @event = Event.new
+  end
 
   def grab_event
     @event = Event.find(params[:id])

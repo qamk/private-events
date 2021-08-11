@@ -1,0 +1,33 @@
+<div class="container is-widescreen">
+  <% invites.each do |invite| %>
+    <div class="column is-one-quarter">
+      <div class="card">
+        <article class="media">
+          <div class="card-header">
+            <p class="card-header-title">
+              <strong><%= invite.username %></strong>
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="media-content">
+              <p class="content">
+                <%= invite.message %>
+              </p>
+              <div class="level">
+                <div class="level-item has-text-centered">
+                  <p class="content"><%= invite.rsvp %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer-item">
+              <p class="title">Created At</p>
+              <p class="subtitle"><%= invite.created_at %></p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  <% end %>
+</div>
