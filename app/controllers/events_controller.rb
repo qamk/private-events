@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :grab_event, except: %i[index destroy create new]
+  before_action :grab_event, except: %i[index create new]
   before_action :new_event, only: %i[index new]
   before_action :authenticate_user!, except: %i[index show]
 
@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     @page = params.fetch(:page, 0).to_i # return :page from params or return 0
     @events = Event.for_page(@page, EVENTS_PER_PAGE).includes(:host)
     @older_events = Event.for_page(@page + 1, EVENTS_PER_PAGE)
+    @past_events = Event.all.past
   end
 
   # GET /events/new

@@ -1,34 +1,29 @@
-<div class="container is-fluid">
-  <% events.each do |event| %>
-    <div class="column">
+  <% events.each_with_index do |event, i| %>
+    <div class="column is-6">
       <div class="card">
-        <header class="card-header">
+        <header class="card-header has-background-info-light">
           <p class="card-header-title">
             <strong><%= event.name %></strong>
           </p>
         </header>
         <div class="card-content">
           <div class="media-content">
-            <p class="content">
-              <%= event.description %>
-            </p>
+            <%# <p class="content"> %>
+              <%# <%= event.description %>
+            <%# </p> %>
             <div class="box">
               <div class="level">
-                <div class="level-left">
-                  <div class="level-item">
-                    <p class="content">in <%= event.location %></p>
-                  </div>
+                <div class="level-item">
+                  <p class="content">in <%= event.location %></p>
                 </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <%= event.datetime %>
-                  </div>
+                <div class="level-item">
+                  <%= event.datetime %>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer has-background-light">
           <div class="card-footer-item">
             <%= link_to "View Event", event_path(event) %>
           </div>
@@ -39,4 +34,3 @@
       </div>
     </div>
   <% end %>
-</div>

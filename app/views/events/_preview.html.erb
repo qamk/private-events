@@ -3,15 +3,19 @@
 <div class="tile is-ancestor">
   <div class="tile is-parent is-vertical is-3">
     <div class="tile is-child box"> <%# box for drop shadow %>
-      <h4 class="title is-4">Event Name</h4>
+      <h6 class="title is-6">Event Host</h6>
+      <p class="content"><%= event.host.username %></p>
+    </div>
+    <div class="tile is-child box"> <%# box for drop shadow %>
+      <h6 class="title is-6">Event Name</h6>
       <p class="content"><%= event.name %></p>
     </div>
     <div class="tile is-child box">
-      <h4 class="title is-4">Event Location</h4>
+      <h6 class="title is-6">Event Location</h6>
       <p class="content"><%= event.location %></p>
     </div>
     <div class="tile is-child box">
-      <h4 class="title is-4">Event Date</h4>
+      <h6 class="title is-6">Event Date</h6>
       <p class="content"><%= event.datetime %></p>
     </div>
     <%# if it's changed to DATE & TIME not just DATETIME %>
@@ -21,7 +25,7 @@
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <h4 class="title is-4">Event Description</h4>
+      <h6 class="title is-6">Event Description</h6>
       <p class="content"><%= event.description %></p>
     </div>
   </div>

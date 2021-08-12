@@ -1,11 +1,23 @@
 <div class="container is-widescreen">
-  <% invites.each do |invite| %>
+  <% unless invites.any? %>
+    <div class="level">
+      <div class="level-item">
+        <h1 class="title is-1">NO INVITES TO SHOW</h1>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <%= link_to "Invite someone... come on", new_event_invite_url(@event), class: "button is-success is-dark is-inverted" %>
+      </div>
+    </div>
+  <% end %>
+  <% invites.includes(:invited_user).each do |invite| %>
     <div class="column is-one-quarter">
       <div class="card">
         <article class="media">
           <div class="card-header">
             <p class="card-header-title">
-              <strong><%= invite.username %></strong>
+              <strong><%= invite.invited_user.username %></strong>
             </p>
           </div>
           <div class="card-content">

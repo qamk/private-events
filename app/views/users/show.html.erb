@@ -1,0 +1,14 @@
+<div class="section">
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column">
+        <%# Nested columns %>
+        <div class="columns">
+          <% if @attending&.exists? %>
+            <%= render 'events/events', events: @attending %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,7 +39,10 @@
               <%= link_to 'New Event', new_event_path, class: "button is-primary is-dark is-inverted" %>
             </div>
             <div class="navbar-item">
-              <%= link_to "Edit account", edit_user_registration_path, class: "button is-primary is-active" %>
+              <%= link_to current_user.username, current_user, class: "button is-link is-dark is-inverted" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to "Edit Account", edit_user_registration_path, class: "button is-primary is-active" %>
             </div>
             <div class="navbar-item">
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger is-active" %>

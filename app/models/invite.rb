@@ -6,7 +6,7 @@ class Invite < ApplicationRecord
     maximum: 25,
     too_long: "No more than 25 words. You have %{count}."
   }
-  scope :invited, ->(event_id) { joins(:users).where(event_invite_id: event_id) }
+  scope :invited, ->(event_id) { where(event_invite_id: event_id) }
   scope :for_page, ->(page, invite_per_page) {
     order('invites.created_at DESC').offset(page * invite_per_page).limit(invite_per_page)
   }

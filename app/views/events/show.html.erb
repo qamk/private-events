@@ -1,6 +1,9 @@
 <div class="section">
   <div class="container">
     <%= render 'preview', event: @event %>
-    <%= link_to "Edit event", edit_event_path(@event), class: "button is-link is-active" %>
+    <% if user_signed_in? && current_user == @event.host %>
+      <%= link_to "Edit event", edit_event_path(@event), class: "button is-link is-active" %>
+      <%= link_to "Invite users", new_event_invite_url(@event), class: "button is-link is-warning is-dark is-active" %>
+    <% end %>
   </div>
 </div>

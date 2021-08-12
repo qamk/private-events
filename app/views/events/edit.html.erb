@@ -2,8 +2,13 @@
   <div class="container is-fullhd">
     <div class="columns">
       <div class="column">
-        <%= render 'event-form', event: @event %>
-        <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: 'Delete event?'} %>
+        <% if current_user == @event.host %>
+          <%= render 'event-form', event: @event %>
+          <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: 'Delete event?'} %>
+        <% else %>
+          <h3 class="title">Tut tut... you didn't create this event...</h3>
+          <h3 class="subtitle">This is a sign to make your own...</h3>
+        <% end %>
       </div>
       <div class="column">
         <%= render 'preview', event: @event %>

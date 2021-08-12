@@ -1,47 +1,45 @@
 <div class="block">
-  <h2 class="is-title is-2"></h2>
-  <div class="container">
-    <div class="box">
-      <%= form_with model: invite do |form| %>
-          <% if event_creator? %>
+  <div class="box">
+    <%= form_with model: [event, invite] do |form| %>
+      <% if event_creator? %>
 
-            <div class="block">
-              <div class="field">
-                  <div class="control">
-                    <%= form.collection_check_boxes :invited_user, users, :id, :username do |builder|  %>
-                        <%= builder.label class: 'checkbox' %> <%# Label for the check_box %>
-                    <% end %>
-                  </div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="field">
-                <%= form.label :message, 'Message' %>
-                <div class="control">
-                  <%= form.text_area :message, placeholder: 'Name of the event', class: 'textarea' %>
-                </div>
-              </div>
-            </div>
-
-          <% else %>
-
-            <div class="block">
-              <div class="field">
-                <div class="control">
-                  <%# label :value option must equal radio_button value (second argument) %>
-                  <%= form.label :rsvp, 'Attending', class: 'radio', value: 'true' %>
-                  <%= form.radio_button :rsvp, 'true' %>
-                  <%= form.label :rsvp 'Not Attending', class: 'radio', value: 'false' %>
-                  <%= form.radio_button :rsvp, 'false' %>
-                </div>
-              </div>
-            </div>
-          <% end %>
         <div class="block">
-          <%= form.submit 'Create Invite', class: 'button is-success is-dark is-active' %>
+          <div class="field">
+              <div class="control">
+                <%= form.collection_select :invited_user, users, :id, :username do |builder|  %>
+                    <%= builder.label class: 'checkbox' %> <%# Label for the select %>
+                    <%= builder.select class: 'checkbox' %>
+                <% end %>
+              </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="field">
+            <%= form.label :message, 'Message' %>
+            <div class="control">
+              <%= form.text_area :message, placeholder: 'Name of the event', class: 'textarea' %>
+            </div>
+          </div>
+        </div>
+
+      <% else %>
+
+        <div class="block">
+          <div class="field">
+            <div class="control">
+              <%# label :value option must equal radio_button value (second argument) %>
+              <%= form.label :rsvp, 'Attending', class: 'radio', value: 'true' %>
+              <%= form.radio_button :rsvp, 'true' %>
+              <%= form.label :rsvp, 'Not Attending', class: 'radio', value: 'false' %>
+              <%= form.radio_button :rsvp, 'false' %>
+            </div>
+          </div>
         </div>
       <% end %>
+    <div class="block">
+      <%= form.submit 'Create Invite', class: 'button is-success is-dark is-active' %>
     </div>
+  <% end %>
   </div>
 </div>
