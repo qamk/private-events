@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_action :new_event, only: %i[index new]
   before_action :authenticate_user!, except: %i[index show]
 
+
   attr_accessor :event
 
   EVENTS_PER_PAGE = 4
@@ -12,7 +13,7 @@ class EventsController < ApplicationController
     @page = params.fetch(:page, 0).to_i # return :page from params or return 0
     @events = Event.for_page(@page, EVENTS_PER_PAGE).includes(:host)
     @older_events = Event.for_page(@page + 1, EVENTS_PER_PAGE)
-    @past_events = Event.all.past
+    @past_events = Event.all.past.order(datetime: :desc).limit(5)
   end
 
   # GET /events/new

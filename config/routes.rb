@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'users/show'
   devise_for :users
 
   root 'events#index'
   get 'profile', to: 'users#show'
-  resolve('User') { [:profile] }
+  resolve('User') { [:profile] } # Allows link_to with a User object to route to profile (singular resource)
 
   resources :events do
     resources :invites, shallow: true

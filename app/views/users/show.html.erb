@@ -3,12 +3,76 @@
     <div class="columns">
       <div class="column">
         <%# Nested columns %>
-        <div class="columns">
+        <div class="columns is-multiline">
+          <%# Future events (attending) %>
           <% if @attending&.exists? %>
-            <%= render 'events/events', events: @attending %>
+            <div class="column is-12">
+              <div class="block">
+                <h3 class="title is-3 has-text-weight-normal">Attending</h3>
+              </div>
+            </div>
+            <%= render 'invited-to', invited_to: @attending %>
           <% end %>
         </div>
+
+        <div class="columns is-multiline">
+          <% if @not_attending&.exists? %>
+            <div class="column is-12">
+              <div class="block">
+                <h3 class="title is-3 has-text-weight-normal">Not Attending</h3>
+              </div>
+            </div>
+            <%= render 'invited-to', invited_to: @not_attending %>
+          <% end %>
+        </div>
+
+        <div class="columns is-multiline">
+          <% if @pending&.exists? %>
+            <div class="column is-12">
+              <div class="block">
+                <h3 class="title is-3 has-text-weight-normal">Pending</h3>
+              </div>
+            </div>
+            <%= render 'invited-to', invited_to: @pending %>
+          <% end %>
+        </div>
+
+        <div class="columns is-multiline">
+          <% if @hosted&.exists? %>
+            <div class="column is-12">
+              <div class="block">
+                <h3 class="title is-3 has-text-weight-normal">Hosting</h3>
+              </div>
+            </div>
+            <%= render 'hosted', hosted: @hosted %>
+          <% end %>
+        </div>
+
       </div>
     </div>
   </div>
+<%# Pagination %>
+  <div class="level">
+    <div class="level-left">
+      <div class="block">
+        <div class="level-item">
+          <nav class="pagination">
+            <% unless @page.zero? %>
+              <%= link_to "Previous Page", profile_url(page: @page - 1), class: 'pagination-previous' %>
+            <% end %>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="level-right">
+      <div class="level-item">
+        <nav class="pagination">
+        <% if @show_next_page %>
+          <%= link_to "Next Page", profile_url(page: @page + 1), class: 'pagination-next' %>
+        <% end %>
+      </nav>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
 
+  def in_the_future?(event)
+    event.datetime > Date.current.to_formatted_s(:db)
+  end
+  helper_method :in_the_future? # Gives method access to view
 end

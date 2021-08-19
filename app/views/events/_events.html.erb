@@ -1,4 +1,4 @@
-  <% events.each_with_index do |event, i| %>
+  <% events.each do |event| %>
     <div class="column is-6">
       <div class="card">
         <header class="card-header has-background-info-light">
@@ -7,18 +7,16 @@
           </p>
         </header>
         <div class="card-content">
-          <div class="media-content">
-            <%# <p class="content"> %>
-              <%# <%= event.description %>
-            <%# </p> %>
-            <div class="box">
-              <div class="level">
-                <div class="level-item">
-                  <p class="content">in <%= event.location %></p>
-                </div>
-                <div class="level-item">
-                  <%= event.datetime %>
-                </div>
+          <%# <p class="content"> %>
+            <%# <%= event.description %>
+          <%# </p> %>
+          <div class="box">
+            <div class="level">
+              <div class="level-item">
+                <p class="content">in <%= event.location %></p>
+              </div>
+              <div class="level-item">
+                <%= event.datetime %>
               </div>
             </div>
           </div>

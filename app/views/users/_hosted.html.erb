@@ -1,0 +1,21 @@
+  <% hosted.each do |event| %>
+    <div class="column">
+      <div class="block">
+        <div class="tile is-ancester">
+          <div class="tile is-parent">
+            <div class="tile is-child">
+              <h6 class="subtitle has-text-weight-semibold mb-3"><%= event.name %></h6>
+              <div class="tile is-parent is-vertical">
+                <div class="tile is-child">
+                  <p class="content has-text-weight-light"><%= event.datetime %></p>
+                </div>
+                <div class="tile is-child">
+                  <%= link_to 'Show event', event_path(event), class: "button is-info" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>

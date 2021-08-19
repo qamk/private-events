@@ -1,7 +1,8 @@
 class InvitesController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :grab_event, except: %i[show edit destroy]
+  before_action :grab_event, except: %i[show edit destroy update]
   before_action :grab_invite, except: %i[index new create]
+  before_action :grab_event_by_id, only: %i[edit update]
 
   INVITES_PER_PAGE = 8
 
@@ -14,24 +15,27 @@ class InvitesController < ApplicationController
 
   # GET invites/:id
   def show
+    redirect_to current_user unless invited_user?
   end
 
   # GET events/:event_id/invites/new
   def new
     redirect_to event_invites_url(@event) unless event_creator?
     @invite = Invite.new
-    @users = User.all.where.not(id: [@event.host.id])
+    invited_user_ids = Invite.where(event_invite_id: @event).map(&:invited_user_id)
+    @invited_users = User.all.where(id: invited_user_ids)
+    @users = User.all.where.not(id: [@event.host] | invited_user_ids) # The Pipe is the Union Set Operator
   end
 
   # GET invites/:id/edit
   def edit
-    redirect_to event_invites_url(@invite) unless invited_user?
+    redirect_to current_user unless invited_user?
   end
 
   # PUT invites/:id
   def update
     if @invite.update(update_invite_params) && invited_user?
-      redirect_to event_invites_url(@event), notice: 'Success! The invite has been updated.'
+      redirect_to current_user, notice: 'Success! The invite has been updated.'
     else
       flash.now[:error] = 'Failed to update invite'
       render :edit
@@ -43,11 +47,11 @@ class InvitesController < ApplicationController
     creation_params = create_invite_params
     creation_params[:invited_user] = User.find(creation_params[:invited_user].to_i)
     @new_invite = @event.invites.build(creation_params)
-    if @new_invite.save
+    if @new_invite.save && !duplicate_invite?(creation_params[:invited_user])
       redirect_to event_invites_url(@event), notice: 'Success! The invite has been created.'
     else
-      flash.now[:error] = 'Failed to create new invite'
-      render :new
+      flash[:error] = 'Failed to create new invite'
+      redirect_to new_event_invite_path(@event)
     end
   end
 
@@ -59,8 +63,14 @@ class InvitesController < ApplicationController
 
   protected
 
+  def duplicate_invite?(invited_user)
+    Invite.exists?(invited_user_id: invited_user)
+  end
+
   def invited_user?
     @invite ||= grab_invite
+    return false if @invite.nil?
+
     if @invite.invited_user == current_user
       true
     else
@@ -72,6 +82,8 @@ class InvitesController < ApplicationController
 
   def event_creator?
     @event ||= grab_event
+    return false if @event.nil?
+
     if @event.host == current_user
       true
     else
@@ -96,7 +108,11 @@ class InvitesController < ApplicationController
   end
 
   def grab_invite
-    @invite = Invite.find(params[:id]).includes(:users)
+    @invite = Invite.where(id: params[:id]).includes(:invited_user).take
+  end
+
+  def grab_event_by_id
+    @event = Event.where(id: @invite.event_invite).take
   end
 
 end

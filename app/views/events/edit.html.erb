@@ -2,12 +2,13 @@
   <div class="container is-fullhd">
     <div class="columns">
       <div class="column">
-        <% if current_user == @event.host %>
+        <% if current_user == @event.host && in_the_future?(@event) %>
           <%= render 'event-form', event: @event %>
-          <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: 'Delete event?'} %>
+          <%= link_to "Delete Event", event_path(@event), method: :delete, data: { confirm: 'Delete event?' },
+                class: "button is-danger is-inverted" %>
         <% else %>
           <h3 class="title">Tut tut... you didn't create this event...</h3>
-          <h3 class="subtitle">This is a sign to make your own...</h3>
+          <h3 class="subtitle">*This is a sign to make your own*</h3>
         <% end %>
       </div>
       <div class="column">

@@ -1,0 +1,31 @@
+<div class="block">
+  <% invited_to.each do |invited_to| %>
+    <div class="column">
+      <div class="tile is-ancester">
+        <div class="tile is-parent">
+          <div class="tile is-child">
+            <h6 class="subtitle has-text-weight-semibold mb-3"><%= invited_to.event_invite.name %></h6>
+            <div class="tile is-parent is-vertical">
+              <div class="tile is-child">
+                <p class="content has-text-weight-light"><%= invited_to.event_invite.datetime %></p>
+              </div>
+              <% if invited_to.rsvp.nil? %>
+                <div class="tile is-child">
+                  <%= link_to "Attendance status: #{rsvp_string(invited_to.rsvp)} (edit)", edit_invite_path(invited_to), class: "button is-warning is-dark"%>
+                </div>
+              <% elsif invited_to.rsvp %>
+                <div class="tile is-child">
+                  <%= link_to "Attendance status: #{rsvp_string(invited_to.rsvp)} (edit)", edit_invite_path(invited_to), class: "button is-success is-light"%>
+                </div>
+              <% else %>
+                <div class="tile is-child">
+                  <%= link_to "Attendance status: #{rsvp_string(invited_to.rsvp)} (edit)", edit_invite_path(invited_to), class: "button is-danger is-light"%>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+</div>

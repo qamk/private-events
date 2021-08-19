@@ -4,6 +4,14 @@
     <div class="columns">
       <div class="column">
         <%= render 'invite-form', event: @event, invite: @invite, users: @users %>
+        <h4 class="title is-5 has-text-weight-semibold"> Invited Users </h4>
+          <div class="columns is-multiline">
+            <% @invited_users.each do |usr| %>
+              <div class="column is-3">
+                <p class="content has-text-weight-light is-family-sans-serif"><%= usr.username %></p>
+              </div>
+            <% end %>
+          </div>
       </div>
       <div class="column">
         <%= render 'events/preview', event: @event %>

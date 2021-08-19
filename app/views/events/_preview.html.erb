@@ -1,21 +1,21 @@
-<h2 class="title is-2">Current details</h2>
-<h6 class="subtitle is-6">For your reference</h6>
+<h2 class="title is-2">Event details</h2>
+<h6 class="subtitle is-6 has-text-info-dark"><%= in_the_future?(event) ? 'Upcoming event!' : 'No longer accepting invites' %></h6>
 <div class="tile is-ancestor">
   <div class="tile is-parent is-vertical is-3">
     <div class="tile is-child box"> <%# box for drop shadow %>
-      <h6 class="title is-6">Event Host</h6>
+      <h5 class="title is-5">Host</h5>
       <p class="content"><%= event.host.username %></p>
     </div>
     <div class="tile is-child box"> <%# box for drop shadow %>
-      <h6 class="title is-6">Event Name</h6>
+      <h5 class="title is-5">Event Name</h5>
       <p class="content"><%= event.name %></p>
     </div>
     <div class="tile is-child box">
-      <h6 class="title is-6">Event Location</h6>
+      <h5 class="title is-5">Event Location</h5>
       <p class="content"><%= event.location %></p>
     </div>
     <div class="tile is-child box">
-      <h6 class="title is-6">Event Date</h6>
+      <h5 class="title is-5">Event Date</h5>
       <p class="content"><%= event.datetime %></p>
     </div>
     <%# if it's changed to DATE & TIME not just DATETIME %>
@@ -25,7 +25,7 @@
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <h6 class="title is-6">Event Description</h6>
+      <h5 class="title is-5">Event Description</h5>
       <p class="content"><%= event.description %></p>
     </div>
   </div>

@@ -1,0 +1,9 @@
+<div class="column">
+  <div class="ul">
+    <% past_events.each do |past_event| %>
+      <li>
+        <%= link_to past_event.name, event_path(past_event), class: "content has-weight-semibold is-uppercase is-family-monospace" %>
+      </li>
+    <% end %>
+  </div>
+</div>

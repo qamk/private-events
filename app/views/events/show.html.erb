@@ -1,9 +1,12 @@
-<div class="section">
+<section class="section">
   <div class="container">
     <%= render 'preview', event: @event %>
-    <% if user_signed_in? && current_user == @event.host %>
+    <% if user_signed_in? && current_user == @event.host && in_the_future?(@event) %>
       <%= link_to "Edit event", edit_event_path(@event), class: "button is-link is-active" %>
       <%= link_to "Invite users", new_event_invite_url(@event), class: "button is-link is-warning is-dark is-active" %>
     <% end %>
+    <% if user_signed_in? %>
+      <%= link_to "Invitees", event_invites_url(@event), class: "button is-success is-light is-outlined" %>
+    <% end %>
   </div>
-</div>
+</section>

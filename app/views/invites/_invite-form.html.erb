@@ -13,7 +13,9 @@
               </div>
           </div>
         </div>
-
+        <% if event.errors[:message].any? %>
+          <p class="content is-small has-family-monospace has-text-warning-dark"><%= event.errors[:message] %></p>
+        <% end %>
         <div class="block">
           <div class="field">
             <%= form.label :message, 'Message' %>

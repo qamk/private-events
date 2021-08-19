@@ -1,26 +1,40 @@
 <div class="section is-medium">
   <div class="container">
+    <% if @invite && @invite.invited_user && @invite.event_invite %>
     <div class="tile is-ancester">
       <div class="tile is-parent is-vertical is-4">
         <div class="tile is-child box">
           <div class="content">
-            <h5 class="title is-5"><%= invite.username %></h5>
-            <p><%= invite.rsvp ? invite.rsvp : 'No response' %></p>
+            <header class="heading is-size-6">
+              <span class="content is-small has-text-primary-dark">Invitation for </span><%= @invite.invited_user.username %>
+            </header>
+            <p class="content is-small has-text-weight-semibold">
+              Attendance status: <%= @invite.rsvp.nil? ? 'None' : @invite.rsvp %>
+            </p>
           </div>
         </div>
         <div class="tile is-child box">
           <div class="content">
-            <p class="heading">Invited at</p>
-            <h5 class="title is-5"><%= invite.created_at %></h5>
+            <header class="heading is-size-6">Invited at</header>
+            <p class="content has-text-weight-normal"><%= @invite.created_at %></p>
           </div>
         </div>
       </div>
       <div class="tile is-parent">
         <div class="tile is-child box">
-            <p class="heading">Message</p>
-            <h5 class="title is-5"><%= invite.message %></h5>
+            <header class="heading is-size-4">Message</header>
+            <p class="content has-text-weight-light"><%= @invite.message %></p>
         </div>
       </div>
     </div>
+    <%= link_to 'Event Details', event_path(@invite.event_invite), class: 'button is-success is-inverted is-light' %>
+    <%= link_to 'Edit Response', edit_invite_path(@invite), class: 'button is-link is-inverted is-light'  %>
+  <% else %>
+    <div class="level">
+      <div class="level-item">
+        <h5 class="title is-5">Nothing to see here...</h5>
+      </div>
+    </div>
   </div>
+  <% end %>
 </div>

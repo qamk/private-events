@@ -12,34 +12,35 @@
     </div>
   <% end %>
   <% invites.includes(:invited_user).each do |invite| %>
-    <div class="column is-one-quarter">
-      <div class="card">
-        <article class="media">
-          <div class="card-header">
-            <p class="card-header-title">
-              <strong><%= invite.invited_user.username %></strong>
+    <div class="column is-6">
+      <div class="tile is-ancester box">
+        <div class="tile is-parent is-vertical box">
+          <div class="tile is-child">
+            <p class="heading has-text-weight-light">
+              Invitation for <strong><%= invite.invited_user.username %></strong>
             </p>
           </div>
-          <div class="card-content">
-            <div class="media-content">
-              <p class="content">
-                <%= invite.message %>
-              </p>
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  <p class="content"><%= invite.rsvp %></p>
-                </div>
-              </div>
-            </div>
+          <div class="tile is-child">
+            <p class="content is-small">Attendance status:
+              <span class="has-text-weight-semibold"> <%= invite.rsvp.nil? ? 'None' : invite.rsvp %></span>
+            </p>
           </div>
-          <div class="card-footer">
-            <div class="card-footer-item">
-              <p class="title">Created At</p>
-              <p class="subtitle"><%= invite.created_at %></p>
-            </div>
+          <div class="tile is-child">
+            <p class="is-small has-text-justified">Created At <br>
+              <span class="is-small has-text-weight-semibold"> <%= invite.created_at %></span>
+            </p>
           </div>
-        </article>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile is-child">
+            <p class="content is-small">Message:</p>
+            <p class="content">
+              <%= invite.message %>
+            </p>
+          </div>
+        </div>
       </div>
+      <%= link_to 'Show invite', invite_path(invite), class: "button is-info is-inverted is-dark" %>
     </div>
   <% end %>
 </div>
