@@ -11,7 +11,7 @@ class Event < ApplicationRecord
   }
   validate :future_date_only
 
-  scope :event_location, ->(country) { where('location = ?', country) }
+  # scope :event_location, ->(country) { where('location = ?', country) }
   scope :users_attending, ->(rsvp, event_id) {
       includes(:invited_user).where(['invites.rsvp = ? AND events.id = ?', rsvp, event_id])
     }

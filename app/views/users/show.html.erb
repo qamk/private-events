@@ -5,46 +5,46 @@
         <%# Nested columns %>
         <div class="columns is-multiline">
           <%# Future events (attending) %>
-          <% if @attending&.exists? %>
             <div class="column is-12">
               <div class="block">
                 <h3 class="title is-3 has-text-weight-normal">Attending</h3>
               </div>
             </div>
+          <% if @attending&.exists? %>
             <%= render 'invited-to', invited_to: @attending %>
           <% end %>
         </div>
 
         <div class="columns is-multiline">
-          <% if @not_attending&.exists? %>
             <div class="column is-12">
               <div class="block">
                 <h3 class="title is-3 has-text-weight-normal">Not Attending</h3>
               </div>
             </div>
+          <% if @not_attending&.exists? %>
             <%= render 'invited-to', invited_to: @not_attending %>
           <% end %>
         </div>
 
         <div class="columns is-multiline">
-          <% if @pending&.exists? %>
             <div class="column is-12">
               <div class="block">
                 <h3 class="title is-3 has-text-weight-normal">Pending</h3>
               </div>
             </div>
+          <% if @pending&.exists? %>
             <%= render 'invited-to', invited_to: @pending %>
           <% end %>
         </div>
 
         <div class="columns is-multiline">
-          <% if @hosted&.exists? %>
             <div class="column is-12">
               <div class="block">
                 <h3 class="title is-3 has-text-weight-normal">Hosting</h3>
               </div>
             </div>
-            <%= render 'hosted', hosted: @hosted %>
+          <% if @hosting&.exists? %>
+            <%= render 'hosting', hosting: @hosting %>
           <% end %>
         </div>
 
@@ -72,6 +72,17 @@
         <% end %>
       </nav>
       </div>
+    </div>
+  </div>
+
+  <div class="columns is-multiline">
+    <div class="column is-6">
+      <h6 class="title is-6 has-text-weight-semibold has-family-sans-serif">Last 10 Attended</h6>
+      <%= render 'events/past-events', past_events: @attended %>
+    </div>
+    <div class="column is-6">
+      <h6 class="title is-6 has-text-weight-semibold has-family-sans-serif">Last 10 Hosted</h6>
+      <%= render 'events/past-events', past_events: @hosted %>
     </div>
   </div>
 
