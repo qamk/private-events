@@ -20,7 +20,6 @@ This project was useful for exploring other things such as:
 - Nested routing
   - Shallow nested routing in this case
 - Effective use of Singular Resources
-
 This was also useful for practising the use of custom helper methods and class methods or "scopes". It was cool to use helper methods to render appropriate views based on what authorization the user had (e.g. editing an invite for an event creator is different to "editing" an invite for an invitee). Finally, reading about related web development and CS topics (e.g. lazy evaluation and eager loading). Naturally, the bulk of my time was spent on styling using **Bulma**, which was both fun and frustrating. I highly recommended using **Emmett** to speed up the creation of elements!
 
 ## Resources
