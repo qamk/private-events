@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def fetch_past_events
     @attended = Invite.user_invites(0, 10, current_user.id, 'true', false)
-    @hosted = Event.where(['events.host_id = ? AND events.datetime < ?', current_user, current_date])
+    @hosted = Event.where(['events.host_id = ? AND events.datetime < ?', current_user, current_datetime])
                    .order(created_at: :desc).limit(10)
   end
 
@@ -38,8 +38,8 @@ class UsersController < ApplicationController
     args.any? { |v| v&.length == ITEMS_PER_PAGE }
   end
 
-  def current_date
-    Date.current.to_formatted_s(:db)
+  def current_datetime
+    DateTime.current.to_formatted_s(:db)
   end
 
 end

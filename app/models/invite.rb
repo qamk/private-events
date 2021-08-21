@@ -20,10 +20,10 @@ class Invite < ApplicationRecord
   # Returns events depending on rsvp status and date for a given page -> ActiveRecord::Relation
   def self.user_invites(page, per_page, user_id, rsvp = nil, future_only = true)
     future_invited_events = self.joins(:event_invite).where(invited_user_id: user_id, rsvp: rsvp)
-                                .where(['events.datetime >= ?', Date.current.to_formatted_s(:db)])
+                                .where(['events.datetime >= ?', DateTime.current.to_formatted_s(:db)])
                                 .for_page(page, per_page).includes(:event_invite)
     past_invited_events = self.joins(:event_invite).where(invited_user_id: user_id, rsvp: rsvp)
-                              .where(['events.datetime < ?', Date.current.to_formatted_s(:db)])
+                              .where(['events.datetime < ?', DateTime.current.to_formatted_s(:db)])
                               .for_page(page, per_page).includes(:event_invite)
     future_only ? future_invited_events : past_invited_events
   end

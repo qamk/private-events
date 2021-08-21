@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def in_the_future?(event)
-    event.datetime > Date.current.to_formatted_s(:db)
+    event.datetime > DateTime.current.to_formatted_s(:db)
   end
   helper_method :in_the_future? # Gives method access to view
 end

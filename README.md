@@ -1,6 +1,6 @@
 # Private Events
 This project was primarily about building on my knowledge on Associations and Querying using Active Record by creating an events listing site.
-A live version is available on Heroku (may take a little while to start). The default user is "user" with a password of "userpassword".
+A live version is available on through [Heroku](https://protected-wildwood-99516.herokuapp.com/) (may take a little while to start).
 
 Developed and deployed with PostGreSQL, made with Ruby 3.0.1 (see the `Gemfile` for the bundled gems) and styled using **bulma**.
 

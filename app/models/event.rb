@@ -15,9 +15,9 @@ class Event < ApplicationRecord
   scope :users_attending, ->(rsvp, event_id) {
       includes(:invited_user).where(['invites.rsvp = ? AND events.id = ?', rsvp, event_id])
     }
-  scope :past, -> { where(['events.datetime < ?', Date.current.to_formatted_s(:db)]) }
+  scope :past, -> { where(['events.datetime < ?', DateTime.current.to_formatted_s(:db)]) }
   scope :for_page, ->(page, events_per_page) {
-      where('events.datetime > ?', Date.current.to_formatted_s(:db))
+      where('events.datetime > ?', DateTime.current.to_formatted_s(:db))
         .order(created_at: :desc).offset(page * events_per_page).limit(events_per_page).includes(:host)
     }
 
@@ -32,7 +32,7 @@ class Event < ApplicationRecord
   end
 
   def future_date_only
-    if datetime && datetime < Date.current.to_formatted_s(:db)
+    if datetime && datetime < DateTime.current.to_formatted_s(:db)
       errors.add(:datetime, 'Cannot be in the past...')
     end
   end
