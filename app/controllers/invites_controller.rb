@@ -47,7 +47,7 @@ class InvitesController < ApplicationController
     creation_params = create_invite_params
     creation_params[:invited_user] = User.find(creation_params[:invited_user].to_i)
     @new_invite = @event.invites.build(creation_params)
-    if @new_invite.save && !duplicate_invite?(creation_params[:invited_user])
+    if !duplicate_invite?(creation_params[:invited_user]) && @new_invite.save 
       redirect_to event_invites_url(@event), notice: 'Success! The invite has been created.'
     else
       flash[:error] = 'Failed to create new invite'

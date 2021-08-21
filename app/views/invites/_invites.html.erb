@@ -1,13 +1,14 @@
-<div class="container is-widescreen">
   <% unless invites.any? %>
-    <div class="level">
-      <div class="level-item">
-        <h1 class="title is-1">NO INVITES TO SHOW</h1>
+    <div class="container">
+      <div class="level">
+        <div class="level-item">
+          <h1 class="title is-1">NO INVITES TO SHOW</h1>
+        </div>
       </div>
-    </div>
-    <div class="level">
-      <div class="level-item">
-        <%= link_to "Invite someone... come on", new_event_invite_url(@event), class: "button is-success is-dark is-inverted" %>
+      <div class="level">
+        <div class="level-item">
+          <%= link_to "Invite someone... come on", new_event_invite_url(@event), class: "button is-success is-dark is-inverted" %>
+        </div>
       </div>
     </div>
   <% end %>
@@ -40,7 +41,8 @@
           </div>
         </div>
       </div>
-      <%= link_to 'Show invite', invite_path(invite), class: "button is-info is-inverted is-dark" %>
+      <% if invited_user? %>
+        <%= link_to 'Show invite', invite_path(invite), class: "button is-info is-inverted is-dark" %>
+      <% end %>
     </div>
   <% end %>
-</div>
